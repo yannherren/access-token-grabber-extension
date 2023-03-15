@@ -1,57 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom";
+import styles from "./popup.module.css"
+import {clipboard} from "@extend-chrome/clipboard";
 
 const Popup = () => {
-  const [count, setCount] = useState(0);
-  const [currentURL, setCurrentURL] = useState<string>();
+    const [tokenCopied, setTokenCopied] = useState(false);
 
-  useEffect(() => {
-    chrome.action.setBadgeText({ text: count.toString() });
-  }, [count]);
+    useEffect(() => {
+        chrome.storage.local.get('latestAuthToken').then(async (entries) => {
+            if (entries.latestAuthToken) {
+                const token = entries.latestAuthToken
+                await clipboard.writeText(token);
+                await chrome.storage.local.set({ latestAuthToken: undefined })
+                setTokenCopied(true)
+            } else {
+                setTokenCopied(false);
+            }
+        })
+    }, []);
 
-  useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      setCurrentURL(tabs[0].url);
-    });
-  }, []);
 
-  const changeBackground = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const tab = tabs[0];
-      if (tab.id) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            color: "#555555",
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
-    });
-  };
-
-  return (
-    <>
-      <ul style={{ minWidth: "700px" }}>
-        <li>Current URL: {currentURL}</li>
-        <li>Current Time: {new Date().toLocaleTimeString()}</li>
-      </ul>
-      <button
-        onClick={() => setCount(count + 1)}
-        style={{ marginRight: "5px" }}
-      >
-        count up
-      </button>
-      <button onClick={changeBackground}>change background</button>
-    </>
-  );
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.title}>Access Token Grabber</h1>
+            <div>
+                <span>Look for header named:</span>
+                <br /><br />
+                <input value="authorization"/>
+            </div>
+            <div className={styles.message}>
+                {tokenCopied ?
+                    <span>✅ Copied the latest token to your clipboard, use it wisely! 😃</span>
+                    :
+                    <span>Seems like there is no token available yet! Try to make a web request to receive a token.</span>
+                }
+            </div>
+        </div>
+    );
 };
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Popup />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <Popup/>
+    </React.StrictMode>,
+    document.getElementById("root")
 );

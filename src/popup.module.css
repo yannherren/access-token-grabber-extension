@@ -1,0 +1,12 @@
+.container {
+    background-color: #2f2f2f;
+    width: 300px;
+    color: white;
+    margin: 16px;
+}
+
+
+.message {
+    margin-top: 32px;
+    font-size: 14px;
+}
