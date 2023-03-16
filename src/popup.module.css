@@ -3,10 +3,64 @@
     width: 300px;
     color: white;
     margin: 16px;
+    box-sizing: border-box;
 }
 
+.thumb {
+    font-size: 24px;
+}
+
+.success {
+    animation-name: success-appear;
+    animation-duration: 0.5s;
+    transform: scale(0);
+    animation-fill-mode: forwards;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.on {
+    border: none;
+    background-color: #b2de27;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.off {
+    border: none;
+    background-color: #de3c27;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.input {
+    border: 1px solid #b2de27;
+    padding: 8px;
+    background-color: transparent;
+    border-radius: 4px;
+    color: white;
+    width: calc(100% - 16px);
+    transition: 0.3s;
+}
+
+.input:focus {
+    outline: none;
+    border-width: 3px;
+    transition: 0.3s;
+    width: calc(100% - 20px);
+}
+
+.section {
+    margin-top: 12px;
+}
 
 .message {
     margin-top: 32px;
     font-size: 14px;
+}
+
+@keyframes success-appear {
+    from { transform: scale(0) }
+    to { transform: scale(1) }
 }
