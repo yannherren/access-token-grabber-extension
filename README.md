@@ -1,70 +1,11 @@
-# Chrome Extension TypeScript Starter
+![atg_icon](https://user-images.githubusercontent.com/29727377/225693251-d8d5293a-8435-4cef-91ca-73bb393483d2.png)
 
-![build](https://github.com/chibat/chrome-extension-typescript-starter/workflows/build/badge.svg)
+# Access Token Grabber Chrome extension 
 
-Chrome Extension, TypeScript and Visual Studio Code
+![chrome](https://img.shields.io/static/v1?label=Chrome%20extension&message=Access%20Token%20Grabber&logo=googlechrome&color=green&style=for-the-badge)
 
-## Prerequisites
+Introducing the fastest way to get your web request access token - say goodbye to wasting time searching through dev-tools! This extension simplifies the process, allowing you to grab your access token quickly and easily
 
-* [node + npm](https://nodejs.org/) (Current Version)
 
-## Option
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-
-## Includes the following
-
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
-
-## Project Structure
-
-* src/typescript: TypeScript source files
-* src/assets: static files
-* dist: Chrome Extension directory
-* dist/js: Generated JavaScript files
-
-## Setup
-
-```
-npm install
-```
-
-## Import as Visual Studio Code project
-
-...
-
-## Build
-
-```
-npm run build
-```
-
-## Build in watch mode
-
-### terminal
-
-```
-npm run watch
-```
-
-### Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
-
-## Load extension to chrome
-
-Load `dist` directory
-
-## Test
-`npx jest` or `npm run test`
+![asset2_atg](https://user-images.githubusercontent.com/29727377/225693157-10616232-b356-4433-9205-97c1fc99f8d2.png)
+![asset1_atg](https://user-images.githubusercontent.com/29727377/225693147-b09e38ca-8f4f-457c-836f-7fc768ca911f.png)
