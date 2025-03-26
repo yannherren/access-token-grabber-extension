@@ -6,7 +6,7 @@ import {clipboard} from "@extend-chrome/clipboard";
 const Popup = () => {
 
     const [tokenCopied, setTokenCopied] = useState(false);
-    const [headerName, setHeaderName] = useState('authorization');
+    const [headerName, setHeaderName] = useState('Authorization');
     const [listening, setListening] = useState<null | boolean>(null);
 
     useEffect(() => {
@@ -52,32 +52,41 @@ const Popup = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Access Token Grabber</h1>
-            <div>
-                <span>Listening for tokens:</span>
-                <br/><br/>
+            {/*<h1 className={styles.title}>Access Token Grabber</h1>*/}
+            <div className={styles.bar}>
+                <img src="logo-full.png" alt="logo"/>
+
                 {listening ?
-                    <button className={styles.on} onClick={() => setListening(false)}>ON</button>
-                    : <button className={styles.off} onClick={() => setListening(true)}>OFF</button>
+                    <button className={styles["toggle-button"]} onClick={() => setListening(false)}>
+                        <img src="on-button.png" alt="on"/>
+                    </button> :
+
+                    <button className={styles["toggle-button"]} onClick={() => setListening(true)}>
+                        <img src="off-button.png" alt="on"/>
+                    </button>
                 }
             </div>
-            <div className={styles.section}>
-                <span>Look for header named:</span>
-                <br/><br/>
-                <input className={styles.input} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
-            </div>
-            <div className={styles.message}>
-                {tokenCopied ?
-                    <div className={styles.success}>
-                        <span className={styles.thumb}>👍</span>
-                        <br/>
-                        <span>Copied the latest token to your clipboard, use it wisely!</span>
+
+            <div className={styles.content}>
+                <div className={styles["header-name"]}>
+                    <div className={styles.label}>
+                        <img src="key.png" alt="key"/>
+                        <span>Header name (e.g. Authorization)</span>
                     </div>
-                    :
-                    listening ?
-                        <span>Seems like there is no token available yet! Try to make a web request to receive a token.</span>
-                        : ''
-                }
+                    <input className={styles.input} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
+                </div>
+                <div className={styles.message}>
+                    {tokenCopied ?
+                        <div className={styles.success}>
+                            <img src="done.png" alt="done" />
+                            <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
+                        </div>
+                        :
+                        listening ?
+                            <span className={styles.waiting}>Seems like there is no token available yet! Try to make a web request to receive a token. 🤔</span>
+                            : <span className={styles.waiting}>Token detection is turned off. 😴</span>
+                    }
+                </div>
             </div>
         </div>
     );

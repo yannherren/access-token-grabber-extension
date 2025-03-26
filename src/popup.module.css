@@ -1,23 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 .container {
-    background-color: #2f2f2f;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    background: rgb(48,136,223);
+    background: linear-gradient(340deg, rgb(12, 36, 58) 0%, #202020 47%);
     width: 300px;
     color: white;
-    margin: 16px;
     box-sizing: border-box;
 }
 
-.thumb {
-    font-size: 24px;
+.bar {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.bar img {
+    height: 36px;
+}
+
+.bar .toggle-button {
+    background-color: transparent;
+    border: none;
+}
+
+.bar .toggle-button img {
+    width: 48px;
+    height: auto;
+}
+
+.content {
+    padding: 0 16px 24px 16px;
+}
+
+.header-name {
+    animation: appear-up 0.4s 0.4s forwards;
+    opacity: 0;
+}
+
+.header-name .label {
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+
+.header-name .label img {
+    height: 12px;
+    width: auto;
 }
 
 .success {
-    animation-name: success-appear;
-    animation-duration: 0.5s;
-    transform: scale(0);
-    animation-fill-mode: forwards;
+    animation: appear 0.5s 0.2s forwards;
+    opacity: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 16px;
+}
+
+.success img {
+    height: 24px;
+    width: auto;
+    animation: appear-bounce 0.3s 0.4s forwards;
+    opacity: 0;
+}
+
+.waiting {
+    animation: appear-up 0.4s 0.4s forwards;
+    opacity: 0;
 }
 
 .on {
@@ -35,20 +94,19 @@
 }
 
 .input {
-    border: 1px solid #b2de27;
+    border: 1px solid rgba(48, 136, 223, 0.47);
     padding: 8px;
     background-color: transparent;
     border-radius: 4px;
     color: white;
-    width: calc(100% - 16px);
+    width: calc(100% - 24px);
     transition: 0.3s;
 }
 
 .input:focus {
     outline: none;
-    border-width: 3px;
     transition: 0.3s;
-    width: calc(100% - 20px);
+    border: 1px solid #3088df;
 }
 
 .section {
@@ -56,11 +114,22 @@
 }
 
 .message {
-    margin-top: 32px;
+    margin-top: 16px;
     font-size: 14px;
 }
 
-@keyframes success-appear {
-    from { transform: scale(0) }
-    to { transform: scale(1) }
+@keyframes appear-up {
+    from { transform: translateY(8px); opacity: 0 }
+    to { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes appear {
+    from { transform: scale(0.8); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
+
+@keyframes appear-bounce {
+    0% { transform: scale(0.8); opacity: 0 }
+    75% { transform: scale(1.1); opacity: 1 }
+    100% { transform: scale(1); opacity: 1 }
 }
