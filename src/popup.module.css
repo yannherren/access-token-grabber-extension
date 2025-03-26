@@ -25,12 +25,12 @@
     height: 36px;
 }
 
-.bar .toggle-button {
+.toggle-button {
     background-color: transparent;
     border: none;
 }
 
-.bar .toggle-button img {
+.toggle-button img {
     width: 48px;
     height: auto;
 }
@@ -39,12 +39,12 @@
     padding: 0 16px 24px 16px;
 }
 
-.header-name {
+.option {
     animation: appear-up 0.4s 0.4s forwards;
     opacity: 0;
 }
 
-.header-name .label {
+.option .label {
     font-weight: bold;
     display: flex;
     gap: 8px;
@@ -52,8 +52,14 @@
     margin-bottom: 8px;
 }
 
+.inline-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.header-name .label img {
+
+.option .label img {
     height: 12px;
     width: auto;
 }

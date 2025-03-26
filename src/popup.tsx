@@ -8,6 +8,7 @@ const Popup = () => {
     const [tokenCopied, setTokenCopied] = useState(false);
     const [headerName, setHeaderName] = useState('Authorization');
     const [listening, setListening] = useState<null | boolean>(null);
+    const [bearerRemoval, setBearerRemoval] = useState<null | boolean>(null);
 
     useEffect(() => {
         setTimeout(() => {
@@ -31,11 +32,22 @@ const Popup = () => {
     }, [listening])
 
     useEffect(() => {
+        if (bearerRemoval) {
+            chrome.storage.local.set({bearerRemoval: true})
+        } else {
+            chrome.storage.local.set({bearerRemoval: false})
+        }
+    }, [bearerRemoval]);
+
+    useEffect(() => {
         chrome.storage.local.get('headerName').then(val => {
             setHeaderName(val['headerName'])
         })
         chrome.storage.local.get('on').then(val => {
             setListening(val['on'])
+        })
+        chrome.storage.local.get('bearerRemoval').then(val => {
+            setBearerRemoval(val['bearerRemoval'])
         })
         chrome.storage.local.get('latestAuthToken').then(async (entries) => {
             if (entries.latestAuthToken) {
@@ -68,17 +80,32 @@ const Popup = () => {
             </div>
 
             <div className={styles.content}>
-                <div className={styles["header-name"]}>
+                <div className={styles["option"]}>
                     <div className={styles.label}>
                         <img src="key.png" alt="key"/>
                         <span>Header name (e.g. Authorization)</span>
                     </div>
                     <input className={styles.input} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
                 </div>
+                <div className={styles["option"] + " " + styles["inline-option"]}>
+                    <div className={styles.label}>
+                        <img src="remove.png" alt="key"/>
+                        <span>Remove "Bearer" prefix</span>
+                    </div>
+                    {bearerRemoval ?
+                        <button className={styles["toggle-button"]} onClick={() => setBearerRemoval(false)}>
+                            <img src="on-button.png" alt="on"/>
+                        </button> :
+
+                        <button className={styles["toggle-button"]} onClick={() => setBearerRemoval(true)}>
+                            <img src="off-button.png" alt="on"/>
+                        </button>
+                    }
+                </div>
                 <div className={styles.message}>
                     {tokenCopied ?
                         <div className={styles.success}>
-                            <img src="done.png" alt="done" />
+                            <img src="done.png" alt="done"/>
                             <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
                         </div>
                         :
