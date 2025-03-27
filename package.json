@@ -1,6 +1,6 @@
 {
   "name": "access-token-grabber",
-  "version": "rc-1.1.0",
+  "version": "1.1.0-rc.1",
   "description": "access-token-grabber",
   "main": "index.js",
   "scripts": {
