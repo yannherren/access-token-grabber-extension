@@ -21,3 +21,18 @@ chrome.webRequest.onSendHeaders.addListener(
     {urls: ["<all_urls>"]},
     ['requestHeaders']
 )
+
+chrome.runtime.onInstalled.addListener((details) => {
+    if (details.reason === "update") {
+        const currentVersion = chrome.runtime.getManifest().version;
+
+        chrome.storage.local.get("lastVersion", (data) => {
+            const lastVersion = data.lastVersion;
+
+            if (lastVersion !== currentVersion) {
+                chrome.tabs.create({ url: "update.html" });
+                chrome.storage.local.set({ lastVersion: currentVersion });
+            }
+        });
+    }
+});

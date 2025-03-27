@@ -4,7 +4,6 @@ import styles from "./popup.module.css"
 import {clipboard} from "@extend-chrome/clipboard";
 
 const Popup = () => {
-
     const [tokenCopied, setTokenCopied] = useState(false);
     const [headerName, setHeaderName] = useState('Authorization');
     const [listening, setListening] = useState<null | boolean>(null);
@@ -32,6 +31,9 @@ const Popup = () => {
     }, [listening])
 
     useEffect(() => {
+        if (bearerRemoval === null) {
+            return
+        }
         if (bearerRemoval) {
             chrome.storage.local.set({bearerRemoval: true})
         } else {
@@ -47,24 +49,29 @@ const Popup = () => {
             setListening(val['on'])
         })
         chrome.storage.local.get('bearerRemoval').then(val => {
-            setBearerRemoval(val['bearerRemoval'])
-        })
-        chrome.storage.local.get('latestAuthToken').then(async (entries) => {
-            if (entries.latestAuthToken) {
-                const token = entries.latestAuthToken
-                await clipboard.writeText(token);
-                await chrome.storage.local.set({latestAuthToken: undefined})
-                setTokenCopied(true)
-            } else {
-                setTokenCopied(false);
-            }
+            const removeBearer = val['bearerRemoval'];
+            setBearerRemoval(removeBearer)
+
+            chrome.storage.local.get('latestAuthToken').then(async (entries) => {
+                if (entries.latestAuthToken) {
+                    let token: string = entries.latestAuthToken;
+                    if (removeBearer) {
+                        token = token.replace("Bearer ", "").replace("bearer ", "");
+                    }
+
+                    await clipboard.writeText(token);
+                    await chrome.storage.local.set({latestAuthToken: undefined})
+                    setTokenCopied(true)
+                } else {
+                    setTokenCopied(false);
+                }
+            })
         })
     }, []);
 
 
     return (
         <div className={styles.container}>
-            {/*<h1 className={styles.title}>Access Token Grabber</h1>*/}
             <div className={styles.bar}>
                 <img src="logo-full.png" alt="logo"/>
 
@@ -88,7 +95,7 @@ const Popup = () => {
                     <input className={styles.input} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
                 </div>
                 <div className={styles["option"] + " " + styles["inline-option"]}>
-                    <div className={styles.label}>
+                    <div className={styles.label + " " + styles.bearer}>
                         <img src="remove.png" alt="key"/>
                         <span>Remove "Bearer" prefix</span>
                     </div>
