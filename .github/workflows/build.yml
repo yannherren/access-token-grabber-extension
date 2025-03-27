@@ -47,4 +47,5 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           prerelease: true
-          files: ${{ env.PACKAGE_VERSION }}.zip
+          files: |
+            ${{ env.PACKAGE_VERSION }}.zip
