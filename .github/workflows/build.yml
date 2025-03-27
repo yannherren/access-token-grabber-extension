@@ -21,11 +21,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: echo "PACKAGE_VERSION=$(npm pkg get version | tr -d '"')" >> $GITHUB_ENV
     - run: npm ci
     - run: npm run build --if-present
     - name: Zip dist folder
-      run: zip -r "$(npm pkg get version | tr -d '"').zip" dist
+      run: zip -r dist.zip dist
     - uses: actions/upload-artifact@v4
       with:
-        name: my-artifact
-        path: path/to/artifact/world.txt
+        name: ${{ env.PACKAGE_VERSION }}
+        path: dist.zip
