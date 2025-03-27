@@ -36,3 +36,5 @@ chrome.runtime.onInstalled.addListener((details) => {
         });
     }
 });
+
+chrome.runtime.setUninstallURL("https://herrenio.formaloo.co/mhnrbp");
