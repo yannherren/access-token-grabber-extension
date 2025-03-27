@@ -41,7 +41,7 @@ jobs:
       - run: echo "PACKAGE_VERSION=$(npm pkg get version | tr -d '"')" >> $GITHUB_ENV
       - uses: actions/download-artifact@v4
         with:
-          name: my-artifact
+          name: ${{ env.PACKAGE_VERSION }}
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
