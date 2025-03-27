@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import styles from "./popup.module.css"
 import {clipboard} from "@extend-chrome/clipboard";
 
@@ -126,9 +126,10 @@ const Popup = () => {
     );
 };
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+
+root.render(
     <React.StrictMode>
         <Popup/>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 );

@@ -17,7 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    animation: appear-up 0.4s 0.2s forwards;
+    animation: appear-up 0.4s forwards;
     opacity: 0;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .option {
-    animation: appear-up 0.4s 0.4s forwards;
+    animation: appear-up 0.4s 0.2s forwards;
     opacity: 0;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .success {
-    animation: appear 0.5s 0.2s forwards;
+    animation: appear 0.4s forwards;
     opacity: 0;
     display: flex;
     justify-content: center;
@@ -80,12 +80,12 @@
 .success img {
     height: 24px;
     width: auto;
-    animation: appear-bounce 0.3s 0.4s forwards;
+    animation: appear-bounce 0.3s 0.2s forwards;
     opacity: 0;
 }
 
 .waiting {
-    animation: appear-up 0.4s 0.4s forwards;
+    animation: appear-up 0.4s forwards;
     opacity: 0;
 }
 
