@@ -1,9 +1,8 @@
 {
   "manifest_version": 3,
-
   "name": "Access Token Grabber",
-  "description": "Grab an access token of a web request quickly and waste no more time finding it in dev-tools",
-  "version": "1.1",
+  "description": "Access Token Grabber - One‑click JWT tokens from Dev-Tools for faster API testing (Open-source)\n",
+  "version": "1.2",
 
   "action": {
     "default_icon": "icon.png",
