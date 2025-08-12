@@ -1,6 +1,7 @@
 import styles from "../styles/options.module.css";
 import React, {useEffect, useState} from "react";
 import {clipboard} from "@extend-chrome/clipboard";
+import {Inspect} from "./inspect";
 
 interface Props {
     tokenCopied: (copied: boolean) => void

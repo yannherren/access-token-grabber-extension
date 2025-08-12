@@ -1,0 +1,101 @@
+.details {
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.details summary {
+    margin: 8px 0 0 40px;
+}
+
+.properties {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 8px;
+    background-color: #090909;
+    border-radius: 4px;
+}
+
+.properties div {
+    font-family: Monospace;
+    padding: 4px 6px;
+    position: relative;
+}
+
+.properties div:nth-child(even) {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b8b8b8 #090909;
+    text-wrap: nowrap;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.properties div[data-content^="\""] {
+    color: #0fae0f;
+}
+
+.bool {
+    color: #ae810f;
+}
+
+.copy {
+    position: fixed;
+    right: 16px;
+    width: 16px;
+    background: black;
+    border-radius: 50%;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.properties div:nth-child(even):hover > .copy {
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.properties div:nth-child(even):active {
+    opacity: 0.8;
+    transition: 0.2s;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+@keyframes appear-up {
+    from {
+        transform: translateY(8px);
+        opacity: 0
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0.8);
+        opacity: 0
+    }
+    to {
+        transform: scale(1);
+        opacity: 1
+    }
+}
+
+@keyframes appear-bounce {
+    0% {
+        transform: scale(0.8);
+        opacity: 0
+    }
+    75% {
+        transform: scale(1.1);
+        opacity: 1
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1
+    }
+}

@@ -4,6 +4,7 @@ import styles from "./styles/popup.module.css"
 import {ActiveToggle} from "./components/active-toggle";
 import {Options} from "./components/options";
 import './global.css'
+import {Inspect} from "./components/inspect";
 
 const Popup = () => {
     const [listening, setListening] = useState<null | boolean>(null);
@@ -20,10 +21,13 @@ const Popup = () => {
                 <Options tokenCopied={(copied) => setTokenCopied(copied)}></Options>
                 <div className={styles.message}>
                     {tokenCopied ?
-                        <div className={styles.success}>
-                            <img src="done.png" alt="done"/>
-                            <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
-                        </div>
+                        <>
+                            <div className={styles.success}>
+                                <img src="done.png" alt="done"/>
+                                <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
+                            </div>
+                            <Inspect></Inspect>
+                        </>
                         :
                         listening ?
                             <span className={styles.waiting}>Seems like there is no token available yet! Try to make a web request to receive a token. 🤔</span>
