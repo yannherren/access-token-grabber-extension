@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
 .container {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -25,47 +23,9 @@
     height: 36px;
 }
 
-.toggle-button {
-    background-color: transparent;
-    border: none;
-}
-
-.toggle-button img {
-    width: 48px;
-    height: auto;
-}
 
 .content {
     padding: 0 24px 24px 24px;
-}
-
-.option {
-    animation: appear-up 0.4s 0.2s forwards;
-    opacity: 0;
-}
-
-.option .label {
-    font-weight: bold;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.inline-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.option .label img {
-    height: 12px;
-    width: auto;
-}
-
-.bearer {
-    margin: 0 !important;
 }
 
 .success {
@@ -87,36 +47,6 @@
 .waiting {
     animation: appear-up 0.4s forwards;
     opacity: 0;
-}
-
-.on {
-    border: none;
-    background-color: #b2de27;
-    padding: 8px 16px;
-    border-radius: 4px;
-}
-
-.off {
-    border: none;
-    background-color: #de3c27;
-    padding: 8px 16px;
-    border-radius: 4px;
-}
-
-.input {
-    border: 1px solid rgba(48, 136, 223, 0.47);
-    padding: 8px;
-    background-color: transparent;
-    border-radius: 4px;
-    color: white;
-    width: calc(100% - 24px);
-    transition: 0.3s;
-}
-
-.input:focus {
-    outline: none;
-    transition: 0.3s;
-    border: 1px solid #3088df;
 }
 
 .section {

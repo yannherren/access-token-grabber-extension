@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "@extend-chrome/clipboard": "^2.0.0",
+    "jwt-decode": "^4.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/chrome": "0.0.312",
     "@types/jest": "^29.5.14",
+    "@types/jws": "^3.2.10",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "copy-webpack-plugin": "^13.0.0",

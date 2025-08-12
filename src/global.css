@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.toggle-button {
+    background-color: transparent;
+    border: none;
+}
+
+.toggle-button img {
+    width: 48px;
+    height: auto;
+}
+
+
+.on {
+    border: none;
+    background-color: #b2de27;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.off {
+    border: none;
+    background-color: #de3c27;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.input {
+    border: 1px solid rgba(48, 136, 223, 0.47);
+    padding: 8px;
+    background-color: transparent;
+    border-radius: 4px;
+    color: white;
+    width: calc(100% - 24px);
+    transition: 0.3s;
+}
+
+.input:focus {
+    outline: none;
+    transition: 0.3s;
+    border: 1px solid #3088df;
+}

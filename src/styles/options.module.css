@@ -1,0 +1,45 @@
+
+.option {
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.option .label {
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.inline-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.option .label img {
+    height: 12px;
+    width: auto;
+}
+
+.bearer {
+    margin: 0 !important;
+}
+
+@keyframes appear-up {
+    from { transform: translateY(8px); opacity: 0 }
+    to { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes appear {
+    from { transform: scale(0.8); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
+
+@keyframes appear-bounce {
+    0% { transform: scale(0.8); opacity: 0 }
+    75% { transform: scale(1.1); opacity: 1 }
+    100% { transform: scale(1); opacity: 1 }
+}
