@@ -5,6 +5,7 @@
 
 .details summary {
     margin: 8px 0 0 40px;
+    cursor: pointer;
 }
 
 .properties {

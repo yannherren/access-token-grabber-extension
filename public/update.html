@@ -30,7 +30,7 @@
 
         .update {
             background: transparent;
-            width: 500px;
+            width: 200px;
             margin-bottom: 48px;
         }
 
@@ -55,11 +55,17 @@
 
         .update-notes {
             font-size: 18px;
-            max-width: 500px;
+            max-width: 530px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 48px;
+        }
+
+        .shortcut {
+            background-color: rgba(66, 66, 66, 0.7);
+            padding: 0 4px;
+            border-radius: 6px;
         }
     </style>
 
@@ -68,17 +74,17 @@
 <body>
 <section class="content">
     <div class="update-content">
-        <img src="update.png" alt="update" class="update"/>
+        <img src="header-logo.png" alt="update" class="update"/>
         <h1>Access Token Grabber Update</h1>
-        <h2>Release April 2025, v1.1</h2>
+        <h2>Release August 2025, v1.2</h2>
     </div>
     <div class="update-notes">
         <div>
             Thank you for using our extension! Here's what's new:
             <ul>
-                <li>Fully redesigned interface</li>
-                <li>Header name bug fixed</li>
-                <li>Option to auto-remove "Bearer" prefix when copying tokens</li>
+                <li>Copy a token even faster using the shortcut <span class="shortcut">Alt+C</span></li>
+                <li>Inspect a JWT token directly in the UI if one is detected</li>
+                <li>Bug fixes</li>
             </ul>
             Have fun with the new features, and don't forget to visit our <a href="https://github.com/yannherren/access-token-grabber-extension" target="_blank">GitHub repo</a> for more insights and updates!
 
