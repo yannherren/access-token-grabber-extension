@@ -81,6 +81,12 @@
             z-index: -1;
             border-radius: 50%;
         }
+
+        .shortcut {
+            background-color: rgba(66, 66, 66, 0.7);
+            padding: 0 4px;
+            border-radius: 6px;
+        }
     </style>
 
 </head>
@@ -96,10 +102,10 @@
         <div>
             Here is how to use Access Token Grabber:
             <ol>
-                <li>Make sure the extension is enabled. Open it once to confirm it's running.</li>
+                <li>Activate the extension by clicking on its icon.</li>
                 <li>Pin the extension to your browser toolbar for quick access.</li>
-                <li>Browse to your app that triggers authenticated requests.</li>
-                <li>Click once on the Access Token Grabber extension icon. The token will be automatically copied to your clipboard.</li>
+                <li>Browse to your app that triggers authenticated requests. A small "1" will appear on the icon, indicating that a token has been found.</li>
+                <li>Click once on the icon or press <span class="shortcut">Alt+C</span> to copy the token to your clipboard.</li>
                 <li>Paste the token into Postman, cURL, or any API client to use it.</li>
             </ol>
             Have fun and don't forget to visit our <a href="https://github.com/yannherren/access-token-grabber-extension" target="_blank">GitHub repo</a>!
