@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+
+            margin: 0;
+            padding: 0;
+            background: url("bg.svg");
+            background-size: cover;
+        }
+
+        a {
+            color: white;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            padding: 0 24px;
+        }
+
+        .install {
+            background: transparent;
+            width: 200px;
+            margin-bottom: 48px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .install-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .install-notes {
+            font-size: 18px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 48px;
+        }
+
+        ol li {
+            position: relative;
+            padding-left: 20px;
+            padding-bottom: 8px;
+            padding-top: -8px;
+        }
+
+        ol li::before {
+            content: '';
+            background-color: rgb(31, 96, 156);
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            display: block;
+            left: -27px;
+            top: -2px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+
+<body>
+<section class="content">
+    <div class="install-content">
+        <img src="header-logo.png"  alt="install" class="install"/>
+        <h1>Welcome!</h1>
+        <h2>Thank you for installing Access Token Grabber!</h2>
+    </div>
+    <div class="install-notes">
+        <div>
+            Here is how to use Access Token Grabber:
+            <ol>
+                <li>Make sure the extension is enabled. Open it once to confirm it's running.</li>
+                <li>Pin the extension to your browser toolbar for quick access.</li>
+                <li>Browse to your app that triggers authenticated requests.</li>
+                <li>Click once on the Access Token Grabber extension icon. The token will be automatically copied to your clipboard.</li>
+                <li>Paste the token into Postman, cURL, or any API client to use it.</li>
+            </ol>
+            Have fun and don't forget to visit our <a href="https://github.com/yannherren/access-token-grabber-extension" target="_blank">GitHub repo</a>!
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+

@@ -23,6 +23,9 @@ chrome.webRequest.onSendHeaders.addListener(
 )
 
 chrome.runtime.onInstalled.addListener((details) => {
+    if (details.reason === "install") {
+        chrome.tabs.create({ url: "install.html" });
+    }
     if (details.reason === "update") {
         const currentVersion = chrome.runtime.getManifest().version;
 
