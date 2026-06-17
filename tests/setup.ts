@@ -1,3 +1,5 @@
+// disclaimer: with help from claude
+
 const mockStorage: Record<string, any> = {};
 
 const chromeStorageLocal = {

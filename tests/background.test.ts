@@ -1,3 +1,5 @@
+// disclaimer: with help from claude
+
 // @ts-ignore
 import { mockHelpers } from './setup';
 
