@@ -35,3 +35,8 @@ Create a production build
 ```
 npm run build
 ```
+
+# License
+
+This project is based on a Chrome Extension TypeScript starter repository by Tomofumi Chiba, licensed under the MIT License.
+It has been modified and extended by Yann Herren.

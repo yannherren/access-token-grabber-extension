@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "outDir": "dist/test",
+    "noEmitOnError": true,
+    "jsx": "react",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jest", "chrome", "node"]
+  },
+  "include": ["src/**/*", "tests/**/*"]
+}

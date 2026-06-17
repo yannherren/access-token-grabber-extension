@@ -1,0 +1,22 @@
+name: test
+
+on:
+  push:
+    branches: [main, develop, master]
+  pull_request:
+    branches: [main, develop, master]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: echo "PACKAGE_VERSION=$(npm pkg get version | tr -d '"')" >> $GITHUB_ENV
+      - run: npm ci
+      - name: Run Tests
+        run: npm test
