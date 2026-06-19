@@ -30,6 +30,7 @@ const Popup = () => {
 
     // TODO make setting state
     // TODO separate settings manager
+    // => maybe custom hook useStorage() -> custom useState()
 
 
     switch (route) {
