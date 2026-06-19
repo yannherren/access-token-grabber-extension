@@ -66,6 +66,13 @@ export const Options = ({tokenCopied}: Props) => {
             </div>
             <input className={"input"} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
         </div>
+        <div className={styles["option"]}>
+            <div className={styles.label}>
+                <img src="key.png" alt="key"/>
+                <span>URL filter</span>
+            </div>
+            <input className={"input"} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
+        </div>
         <div className={styles["option"] + " " + styles["inline-option"]}>
             <div className={styles.label + " " + styles.bearer}>
                 <img src="remove.png" alt="key"/>

@@ -10,6 +10,15 @@
     height: auto;
 }
 
+.back-button {
+    background-color: transparent;
+    border: none;
+}
+
+.back-button img {
+    width: 8px;
+    height: auto;
+}
 
 .on {
     border: none;

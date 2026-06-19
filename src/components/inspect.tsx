@@ -5,8 +5,6 @@ import styles from '../styles/inspect.module.css'
 
 export const Inspect = () => {
 
-    const [open, setOpen] = useState(false);
-    const [rawTokenDetails, setRawTokenDetails] = useState('');
     const [tokenDetails, setTokenDetails] = useState({});
     const [faultyToken, setFaultyToken] = useState(false);
 
@@ -22,7 +20,6 @@ export const Inspect = () => {
                     return
                 }
                 setTokenDetails(tokenDetails)
-                setRawTokenDetails(JSON.stringify(tokenDetails))
             }
         });
     }, []);

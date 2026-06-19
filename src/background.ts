@@ -11,8 +11,9 @@ chrome.webRequest.onSendHeaders.addListener(
                 if (!authorizationToken) {
                     return;
                 }
+                const url = req.url;
                 await chrome.action.setBadgeText({text: '1'});
-                await chrome.storage.local.set({latestAuthToken: authorizationToken})
+                await chrome.storage.local.set({latestAuthToken: authorizationToken, url})
             }
         } else {
             await chrome.storage.local.set({latestAuthToken: ''})

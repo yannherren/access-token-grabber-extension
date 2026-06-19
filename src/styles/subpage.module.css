@@ -1,0 +1,28 @@
+.page {
+}
+
+.bar {
+    padding: 24px 24px 24px 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+    background-color: rgba(255, 255, 255, 0.05);
+    animation: appear-right 1s;
+}
+
+.content {
+    padding: 24px 24px 24px 24px;
+}
+
+
+.bar-title {
+    font-size: 16px;
+    animation: appear-right 0.5s 0.1s forwards;
+    opacity: 0;
+}
+
+@keyframes appear-right {
+    from { transform: translateX(8px); opacity: 0 }
+    to { transform: translateX(0); opacity: 1 }
+}
