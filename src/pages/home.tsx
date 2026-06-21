@@ -12,7 +12,6 @@ interface Props {
 }
 
 export const Home = ({storage, navigate, setOn}: Props) => {
-    const [tokenCopied, setTokenCopied] = useState(false);
 
     return (
         <>
@@ -25,7 +24,7 @@ export const Home = ({storage, navigate, setOn}: Props) => {
 
             <div className={styles.content}>
                 <div className={styles.message}>
-                    {tokenCopied ?
+                    {storage?.latestAuthToken ?
                         <>
                             <div className={styles.success}>
                                 <img src="done.png" alt="done"/>

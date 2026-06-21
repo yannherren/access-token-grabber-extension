@@ -7,6 +7,8 @@ import {Subpage} from "./components/subpage";
 import {useStorage} from "./hooks/storage";
 import {Home} from "./pages/home";
 import {Route} from "./routes";
+import {clipboard} from "@extend-chrome/clipboard";
+import {transformToken} from "./utils/token";
 
 const Popup = () => {
 
@@ -37,9 +39,20 @@ const Popup = () => {
         }
     }
 
+    const copyLatestToken = (removeBearer: boolean) => {
+        if (storage?.latestAuthToken) {
+            const token = transformToken(storage.latestAuthToken, removeBearer);
+            clipboard.writeText(token)
+        }
+    }
+
     useEffect(() => {
         loadStorage();
     }, []);
+
+    useEffect(() => {
+        copyLatestToken(storage?.bearerRemoval ?? false);
+    }, [storage?.latestAuthToken]);
 
     switch (route) {
         case Route.Home:
@@ -54,8 +67,7 @@ const Popup = () => {
             return <div className={styles.container}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])}>
-                        <Options tokenCopied={(copied) => {
-                        }}></Options>
+                        { storage ? <Options storage={storage} updateOptions={updateOptions}></Options> : ''}
                     </Subpage>
                 </div>
 
