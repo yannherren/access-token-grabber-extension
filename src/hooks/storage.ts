@@ -1,34 +1,53 @@
 import {useState} from "react";
 
-export interface Storage {
-    latestAuthToken: string
-    url: string;
-    options: OptionsStorage;
+export type Storage = RuntimeStorage & OptionsStorage;
+
+export interface RuntimeStorage {
+    latestAuthToken?: string
+    url?: string;
 }
 
 export interface OptionsStorage {
-    headerName: string;
-    bearerRemoval: string;
+    headerName?: string;
+    bearerRemoval?: boolean;
+    on?: boolean;
 }
 
-export function useStorage() {
+type UseStorageHook = [
+        Storage | undefined,
+    (storage: RuntimeStorage) => Promise<void>,
+    (options: OptionsStorage) => Promise<void>,
+    () => Promise<void>
+];
+
+export function useStorage(): UseStorageHook {
     const [storage, setStorage] = useState<Storage>()
 
     async function loadStorage() {
-        // load storage
+        const loadedStorage = await getItems()
+        setStorage(loadedStorage);
     }
 
-    function updateStorage(storage: Storage) {
-        // update storage
+    async function updateRuntimeStorage(storage: RuntimeStorage) {
+        await _optimisticUpdate(storage);
     }
 
-    function updateOptions(options: OptionsStorage) {
-        // update options
+    async function updateOptions(options: OptionsStorage) {
+        await _optimisticUpdate(options);
     }
 
-    return [storage, updateStorage, updateOptions, loadStorage]
+    async function _optimisticUpdate(items: OptionsStorage | RuntimeStorage) {
+        setStorage(prevState => ({ ...prevState, ...items }))
+        await setItems(items)
+    }
+
+    return [storage, updateRuntimeStorage, updateOptions, loadStorage]
 }
 
-async function getItem(key: string) {
-    return chrome.storage.local.get().then(it => it[key])
+async function getItems(): Promise<Storage> {
+    return chrome.storage.local.get();
+}
+
+async function setItems(values: any): Promise<void> {
+    return chrome.storage.local.set(values)
 }

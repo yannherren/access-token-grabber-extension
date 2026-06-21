@@ -1,21 +1,17 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import styles from "./styles/popup.module.css"
-import {ActiveToggle} from "./components/active-toggle";
 import {Options} from "./components/options";
 import './global.css'
 import {Subpage} from "./components/subpage";
-
-enum Route {
-    Home,
-    Options
-}
+import {useStorage} from "./hooks/storage";
+import {Home} from "./pages/home";
+import {Route} from "./routes";
 
 const Popup = () => {
-    const [listening, setListening] = useState<null | boolean>(null);
-    const [tokenCopied, setTokenCopied] = useState(false);
 
     const [route, setRoute] = useState<Route>(Route.Home)
+    const [storage, updateRuntimeStorage, updateOptions, loadStorage] = useStorage();
 
     const [outAnimationClass, setOutAnimationClass] = useState<any>()
 
@@ -28,51 +24,38 @@ const Popup = () => {
         }, animationDurationMs)
     }
 
-    // TODO make setting state
-    // TODO separate settings manager
-    // => maybe custom hook useStorage() -> custom useState()
+    const setOn = (on: boolean) => {
+        if (on) {
+            chrome.action.setIcon({path: '/on.png'})
+            updateOptions({on: true})
+            chrome.storage.local.set({on: true})
+        } else {
+            chrome.action.setIcon({path: '/off.png'});
+            chrome.action.setBadgeText({text: ''});
+            updateOptions({on: false})
+            updateRuntimeStorage({latestAuthToken: '', url: ''})
+        }
+    }
 
+    useEffect(() => {
+        loadStorage();
+    }, []);
 
     switch (route) {
         case Route.Home:
-            return (
-                <div className={styles.container + " "}>
-                    <div className={outAnimationClass}>
-
-                        <div className={styles.bar}>
-                            <img src="logo-full.png" alt="logo"/>
-                            <ActiveToggle
-                                onToggle={(currentlyListening) => setListening(currentlyListening)}></ActiveToggle>
-                        </div>
-
-                        <div className={styles.content}>
-                            <div className={styles.message}>
-                                {tokenCopied ?
-                                    <>
-                                        <div className={styles.success}>
-                                            <img src="done.png" alt="done"/>
-                                            <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
-                                        </div>
-                                        {/*<Inspect></Inspect>*/}
-                                    </>
-                                    :
-                                    listening ?
-                                        <span className={styles.waiting}>Seems like there is no token available yet! Try to make a web request to receive a token. 🤔</span>
-                                        : <span className={styles.waiting}>Token detection is turned off. 😴</span>
-                                }
-
-                                <span onClick={() => changeRoute(Route.Options, styles["out-left"])}>Options</span>
-                            </div>
-                        </div>
-                    </div>
-
+            return <div className={styles.container}>
+                <div className={outAnimationClass}>
+                    {storage ?
+                        <Home storage={storage} navigate={route => changeRoute(route, styles["out-left"])}
+                              setOn={setOn}/> : ''}
                 </div>
-            );
+            </div>
         case Route.Options:
             return <div className={styles.container}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])}>
-                        <Options tokenCopied={(copied) => setTokenCopied(copied)}></Options>
+                        <Options tokenCopied={(copied) => {
+                        }}></Options>
                     </Subpage>
                 </div>
 

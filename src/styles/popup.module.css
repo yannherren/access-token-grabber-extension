@@ -11,53 +11,6 @@
     box-sizing: border-box;
 }
 
-.bar {
-    padding: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    animation: appear-up 0.4s forwards;
-    opacity: 0;
-}
-
-.bar img {
-    height: 36px;
-}
-
-
-.content {
-    padding: 0 24px 24px 24px;
-}
-
-.success {
-    animation: appear 0.4s forwards;
-    opacity: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
-
-.success img {
-    height: 24px;
-    width: auto;
-    animation: appear-bounce 0.3s 0.2s forwards;
-    opacity: 0;
-}
-
-.waiting {
-    animation: appear-up 0.4s forwards;
-    opacity: 0;
-}
-
-.section {
-    margin-top: 12px;
-}
-
-.message {
-    margin-bottom: 24px;
-    font-size: 14px;
-}
 
 .out-right {
     animation: disappear-right 0.2s forwards;
@@ -67,10 +20,6 @@
     animation: disappear-left 0.2s forwards;
 }
 
-@keyframes appear-up {
-    from { transform: translateY(8px); opacity: 0 }
-    to { transform: translateY(0); opacity: 1 }
-}
 
 @keyframes disappear-right {
     from { transform: translateX(0); opacity: 1 }
