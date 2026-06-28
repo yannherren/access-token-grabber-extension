@@ -58,6 +58,7 @@ const Popup = () => {
         case Route.Home:
             return <div className={styles.container}>
                 <div className={outAnimationClass}>
+                    {/*<span>{getValidDuration()}</span>*/}
                     {storage ?
                         <Home storage={storage} navigate={route => changeRoute(route, styles["out-left"])}
                               setOn={setOn}/> : ''}

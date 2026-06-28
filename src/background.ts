@@ -1,3 +1,5 @@
+import {jwtDecode} from "jwt-decode";
+
 let authorizationToken: string | undefined = '';
 
 chrome.webRequest.onSendHeaders.addListener(
@@ -11,9 +13,11 @@ chrome.webRequest.onSendHeaders.addListener(
                 if (!authorizationToken) {
                     return;
                 }
+                const token = jwtDecode(authorizationToken);
+                const expirationDate = token.exp ? token.exp * 1000 : 0;
                 const url = req.url;
                 await chrome.action.setBadgeText({text: '1'});
-                await chrome.storage.local.set({latestAuthToken: authorizationToken, url})
+                await chrome.storage.local.set({latestAuthToken: authorizationToken, url, expirationDate})
             }
         } else {
             await chrome.storage.local.set({latestAuthToken: ''})

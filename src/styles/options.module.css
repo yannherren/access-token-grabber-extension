@@ -1,3 +1,13 @@
+.options {
+    transition: 2s;
+    animation: 1s 0.2 scale forwards;
+    overflow: hidden;
+}
+
+/*@keyframes scale {*/
+/*    from {height: calc(208px - 73px - 48px)}*/
+/*    to {height: 400px}*/
+/*}*/
 
 .option {
     animation: appear-up 0.4s 0.2s forwards;

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Options = ({storage, updateOptions}: Props) => {
-    return <>
+    return <div className={styles.options}>
         <div className={styles["option"]}>
             <div className={styles.label}>
                 <img src="key.png" alt="key"/>
@@ -27,5 +27,5 @@ export const Options = ({storage, updateOptions}: Props) => {
             <ActiveToggle value={storage.bearerRemoval ?? false}
                           onToggle={value => updateOptions({bearerRemoval: value})}/>
         </div>
-    </>
+    </div>
 }

@@ -5,6 +5,7 @@ export type Storage = RuntimeStorage & OptionsStorage;
 export interface RuntimeStorage {
     latestAuthToken?: string
     url?: string;
+    expirationDate?: number;
 }
 
 export interface OptionsStorage {

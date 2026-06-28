@@ -16,6 +16,57 @@
     padding: 0 24px 24px 24px;
 }
 
+.options {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.settings {
+    background-color: transparent;
+    border: none;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expiration {
+    font-size: 12px;
+    background: #31512c;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-family: Monospace;
+    /*animation: appear-up 0.4s 0.2s forwards;*/
+    /*opacity: 0;*/
+}
+
+.expiration span {
+
+}
+
+.url {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    gap: 8px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+    margin-top: 24px;
+}
+
+.url span {
+    background: rgb(55, 55, 55);
+    padding: 2px 6px;
+    border-radius: 4px;
+    /*font-family: Monospace;*/
+}
+
 .success {
     animation: appear 0.4s forwards;
     opacity: 0;
@@ -42,7 +93,7 @@
 }
 
 .message {
-    margin-bottom: 24px;
+    /*margin-bottom: 24px;*/
     font-size: 14px;
 }
 
