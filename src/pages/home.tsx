@@ -42,10 +42,10 @@ export const Home = ({storage, navigate, setOn}: Props) => {
             <div className={styles.bar}>
                 <img className={styles.logo} src="logo-full.png" alt="logo"/>
                 <div className={styles.options}>
-                    <div className={styles.expiration}>
-                        <img src="clock.png" height={12}/>
-                        {validDuration}
-                    </div>
+                    {/*<div className={styles.expiration}>*/}
+                    {/*    <img src="clock.png" height={12}/>*/}
+                    {/*    {validDuration}*/}
+                    {/*</div>*/}
                     <button className={styles.settings} onClick={() => navigate(Route.Options)}>
                         <img src="settings.png" height={16}/>
                     </button>
@@ -63,6 +63,29 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                                 <img src="done.png" alt="done"/>
                                 <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
                             </div>
+
+                            <div className={styles.details}>
+                                <div className={styles['details-title']}>Token details</div>
+                                <div className={styles['interaction-item']}>
+                                    <div className={styles.item}>
+                                        <img src="key.png" height={12}/>
+                                        <span className={styles.truncated}>{storage.latestAuthToken}</span>
+                                    </div>
+                                    <div className={styles['interaction-controls']}>
+                                        <img src="copy.png" height={16}/>
+                                        <img src="inspect.png" height={16}/>
+                                    </div>
+                                </div>
+                                <div className={styles.item}>
+                                    <img src="url.png" height={12}/>
+                                    <span>{storage.url}</span>
+                                </div>
+                                <div className={styles.item}>
+                                    <img src="clock.png" height={12}/>
+                                    <span>Expires in {validDuration}</span>
+                                </div>
+                            </div>
+
                             {/*<Inspect></Inspect>*/}
                         </>
                         :
@@ -72,10 +95,13 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                     }
 
                     {/*<div className={styles.expiration}>Expires in: <span>{validDuration}</span></div>*/}
-                    <div className={styles.url}>
-                        <img src="url.png" height={12}/>
-                        <span>{storage.url}</span>
-                    </div>
+                    {/*<div className={styles.url}>*/}
+                    {/*    <img src="url.png" height={12}/>*/}
+                    {/*    <span>{storage.url}</span>*/}
+                    {/*</div>*/}
+
+
+
 
 
                     {/*<span onClick={() => navigate(Route.Options)}>Options</span>*/}

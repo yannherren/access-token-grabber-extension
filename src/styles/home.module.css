@@ -97,6 +97,43 @@
     font-size: 14px;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    animation: appear-up 0.4s forwards;
+    opacity: 0;
+}
+
+.details-title {
+    margin-bottom: 4px;
+}
+
+.truncated {
+    width: 250px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item {
+    display: flex;
+    gap: 16px;
+    opacity: 0.6;
+    align-items: center;
+    opacity: 0.6;
+}
+
+.interaction-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.interaction-controls {
+    display: flex;
+    gap: 12px;
+}
 
 @keyframes appear-up {
     from { transform: translateY(8px); opacity: 0 }
