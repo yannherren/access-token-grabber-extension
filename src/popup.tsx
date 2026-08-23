@@ -66,7 +66,7 @@ const Popup = () => {
                 </div>
             </div>
         case Route.Options:
-            return <div className={styles.container}>
+            return <div className={styles.container + ' ' + styles.subpage}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Options">
                         { storage ? <Options storage={storage} updateOptions={updateOptions}></Options> : ''}
@@ -75,7 +75,7 @@ const Popup = () => {
 
             </div>
         case Route.Inspect:
-            return <div className={styles.container}>
+            return <div className={styles.container + ' ' + styles.subpage}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Inspect">
                         { storage ? <Inspect storage={storage}></Inspect> : ''}
