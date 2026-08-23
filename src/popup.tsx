@@ -9,6 +9,7 @@ import {Home} from "./pages/home";
 import {Route} from "./routes";
 import {clipboard} from "@extend-chrome/clipboard";
 import {transformToken} from "./utils/token";
+import {Inspect} from "./components/inspect";
 
 const Popup = () => {
 
@@ -67,8 +68,17 @@ const Popup = () => {
         case Route.Options:
             return <div className={styles.container}>
                 <div className={outAnimationClass}>
-                    <Subpage back={() => changeRoute(Route.Home, styles["out-right"])}>
+                    <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Options">
                         { storage ? <Options storage={storage} updateOptions={updateOptions}></Options> : ''}
+                    </Subpage>
+                </div>
+
+            </div>
+        case Route.Inspect:
+            return <div className={styles.container}>
+                <div className={outAnimationClass}>
+                    <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Inspect">
+                        { storage ? <Inspect storage={storage}></Inspect> : ''}
                     </Subpage>
                 </div>
 

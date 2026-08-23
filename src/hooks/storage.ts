@@ -10,6 +10,7 @@ export interface RuntimeStorage {
 
 export interface OptionsStorage {
     headerName?: string;
+    urlFilter?: string;
     bearerRemoval?: boolean;
     on?: boolean;
 }

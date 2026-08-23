@@ -12,6 +12,11 @@
 .option {
     animation: appear-up 0.4s 0.2s forwards;
     opacity: 0;
+    margin-bottom: 16px;
+}
+
+.option:last-child {
+    margin-bottom: 0;
 }
 
 .option .label {

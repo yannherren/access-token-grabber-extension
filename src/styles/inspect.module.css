@@ -1,23 +1,21 @@
-.details {
+.subtitle {
+    font-weight: bold;
     animation: appear-up 0.4s 0.2s forwards;
     opacity: 0;
-}
-
-.details summary {
-    margin: 16px 0 0 0;
-    cursor: pointer;
 }
 
 .properties {
     display: grid;
     grid-template-columns: auto auto;
     margin-top: 8px;
-    background-color: #090909;
     border-radius: 4px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
 }
 
 .properties div {
     font-family: Monospace;
+    font-size: 12px;
     padding: 4px 6px;
     position: relative;
 }
@@ -62,6 +60,31 @@
     transition: 0.2s;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
+}
+
+.interaction {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.token summary {
+    cursor: pointer;
+}
+
+.token {
+    margin-top: 8px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.token-content {
+    word-break: break-all;
+    padding: 4px;
+    font-family: Monospace;
 }
 
 @keyframes appear-up {

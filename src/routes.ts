@@ -1,4 +1,5 @@
 export enum Route {
     Home,
-    Options
+    Options,
+    Inspect
 }

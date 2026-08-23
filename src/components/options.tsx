@@ -14,10 +14,18 @@ export const Options = ({storage, updateOptions}: Props) => {
         <div className={styles["option"]}>
             <div className={styles.label}>
                 <img src="key.png" alt="key"/>
-                <span>Header name (e.g. Authorization)</span> Storage
+                <span>Header name (e.g. Authorization)</span>
             </div>
             <input className={"input"} value={storage.headerName}
                    onChange={(e) => updateOptions({headerName: e.target.value})}/>
+        </div>
+        <div className={styles["option"]}>
+            <div className={styles.label}>
+                <img src="url.png" alt="key"/>
+                <span>URL filter (Regex)</span>
+            </div>
+            <input className={"input"} value={storage.urlFilter}
+                   onChange={(e) => updateOptions({urlFilter: e.target.value})}/>
         </div>
         <div className={styles["option"] + " " + styles["inline-option"]}>
             <div className={styles.label + " " + styles.bearer}>

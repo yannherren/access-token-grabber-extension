@@ -14,6 +14,14 @@ interface Props {
 export const Home = ({storage, navigate, setOn}: Props) => {
 
     const [validDuration, setValidDuration] = useState('');
+    const [valid, setValid] = useState(true);
+
+    const isValid = () => {
+        const current_time = new Date()
+        const expDate = storage.expirationDate ?? 0;
+        const difference = expDate - current_time.getTime()
+        return difference > 0;
+    }
 
     const getValidDuration = () => {
         const current_time = new Date()
@@ -28,6 +36,7 @@ export const Home = ({storage, navigate, setOn}: Props) => {
     const refreshValidDuration = () => {
         if (storage.expirationDate) {
             setValidDuration(getValidDuration())
+            setValid(isValid())
         }
     }
 
@@ -73,7 +82,7 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                                     </div>
                                     <div className={styles['interaction-controls']}>
                                         <img src="copy.png" height={16}/>
-                                        <img src="inspect.png" height={16}/>
+                                        <img src="inspect.png" height={16} onClick={() => navigate(Route.Inspect)}/>
                                     </div>
                                 </div>
                                 <div className={styles.item}>
@@ -82,7 +91,10 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                                 </div>
                                 <div className={styles.item}>
                                     <img src="clock.png" height={12}/>
-                                    <span>Expires in {validDuration}</span>
+                                    {valid ?
+                                        <span>Expires in {validDuration}</span> :
+                                        <span>Token expired</span>
+                                    }
                                 </div>
                             </div>
 
