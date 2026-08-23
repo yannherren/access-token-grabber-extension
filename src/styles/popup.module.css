@@ -9,7 +9,7 @@
     color: white;
     box-sizing: border-box;
 
-    height: 298px;
+    height: 265px;
     overflow: hidden;
     transition: height 0.2s ease-in-out; /* back animation doesn't work! */
 }

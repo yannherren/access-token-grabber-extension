@@ -74,7 +74,7 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                             </div>
 
                             <div className={styles.details}>
-                                <div className={styles['details-title']}>Token details</div>
+                                {/*<div className={styles['details-title']}>Token details</div>*/}
                                 <div className={styles['interaction-item']}>
                                     <div className={styles.item}>
                                         <img src="key.png" height={12}/>
