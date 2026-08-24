@@ -15,6 +15,7 @@ export const Home = ({storage, navigate, setOn}: Props) => {
 
     const [validDuration, setValidDuration] = useState('');
     const [valid, setValid] = useState(true);
+    const [tokenCopied, setTokenCopied] = useState(false);
 
     const isValid = () => {
         const current_time = new Date()
@@ -38,6 +39,12 @@ export const Home = ({storage, navigate, setOn}: Props) => {
             setValidDuration(getValidDuration())
             setValid(isValid())
         }
+    }
+
+    const copyToken = () => {
+        if (!storage.latestAuthToken) return;
+        navigator.clipboard.writeText(storage.latestAuthToken);
+        setTokenCopied(true);
     }
 
     useEffect(() => {
@@ -74,20 +81,19 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                             </div>
 
                             <div className={styles.details}>
-                                {/*<div className={styles['details-title']}>Token details</div>*/}
                                 <div className={styles['interaction-item']}>
                                     <div className={styles.item}>
                                         <img src="key.png" height={12}/>
                                         <span className={styles.truncated}>{storage.latestAuthToken}</span>
                                     </div>
                                     <div className={styles['interaction-controls']}>
-                                        <img src="copy.png" height={16}/>
+                                        <img src={tokenCopied ? 'done.png' : 'copy.png'} height={16} onClick={copyToken} />
                                         <img src="inspect.png" height={16} onClick={() => navigate(Route.Inspect)}/>
                                     </div>
                                 </div>
                                 <div className={styles.item}>
                                     <img src="url.png" height={12}/>
-                                    <span>{storage.url}</span>
+                                    <span className={styles.url}>{storage.url}</span>
                                 </div>
                                 <div className={styles.item}>
                                     <img src="clock.png" height={12}/>
@@ -97,27 +103,12 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                                     }
                                 </div>
                             </div>
-
-                            {/*<Inspect></Inspect>*/}
                         </>
                         :
                         storage?.on ?
                             <span className={styles.waiting}>Seems like there is no token available yet! Try to make a web request to receive a token. 🤔</span>
                             : <span className={styles.waiting}>Token detection is turned off. 😴</span>
                     }
-
-                    {/*<div className={styles.expiration}>Expires in: <span>{validDuration}</span></div>*/}
-                    {/*<div className={styles.url}>*/}
-                    {/*    <img src="url.png" height={12}/>*/}
-                    {/*    <span>{storage.url}</span>*/}
-                    {/*</div>*/}
-
-
-
-
-
-                    {/*<span onClick={() => navigate(Route.Options)}>Options</span>*/}
-
                 </div>
             </div>
         </>

@@ -58,7 +58,7 @@ const Popup = () => {
     switch (route) {
         case Route.Home:
             // Shady setting the height here explicitly but otherwise animations won't work properly
-            return <div className={styles.container} style={{'height': '265px'}}>
+            return <div className={styles.container} style={{'height': storage?.on ? storage.latestAuthToken ? '265px' : '162px' : '141px'}}>
                 <div className={outAnimationClass}>
                     {storage ?
                         <Home storage={storage} navigate={route => changeRoute(route, styles["out-left"])}
@@ -66,7 +66,7 @@ const Popup = () => {
                 </div>
             </div>
         case Route.Options:
-            return <div className={styles.container} style={{'height': '319px'}}>
+            return <div className={styles.container} style={{'height': '295px'}}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Options">
                         { storage ? <Options storage={storage} updateOptions={updateOptions}></Options> : ''}

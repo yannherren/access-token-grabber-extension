@@ -11,11 +11,13 @@
 .toggle-button img {
     width: 48px;
     height: auto;
+    cursor: pointer;
 }
 
 .back-button {
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .back-button img {

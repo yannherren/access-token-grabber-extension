@@ -87,6 +87,26 @@
     font-family: Monospace;
 }
 
+.faulty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+    margin-top: 16px;
+}
+
+.faulty h1 {
+    font-size: 16px;
+}
+
+.faulty-details {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
 @keyframes appear-up {
     from {
         transform: translateY(8px);

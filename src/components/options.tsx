@@ -27,7 +27,7 @@ export const Options = ({storage, updateOptions}: Props) => {
             <input className={"input"} value={storage.urlFilter}
                    onChange={(e) => updateOptions({urlFilter: e.target.value})}/>
         </div>
-        <div className={styles["option"] + " " + styles["inline-option"]}>
+        <div className={styles["option"] + " " + styles["inline-option"] + " " + styles['toggle-option']}>
             <div className={styles.label + " " + styles.bearer}>
                 <img src="remove.png" alt="key"/>
                 <span>Remove "Bearer" prefix</span>
