@@ -26,10 +26,14 @@ chrome.webRequest.onSendHeaders.addListener(
                 if (!authorizationToken) {
                     return;
                 }
-                const token = jwtDecode(authorizationToken);
-                const expirationDate = token.exp ? token.exp * 1000 : 0;
-                await chrome.action.setBadgeText({text: '1'});
-                await chrome.storage.local.set({latestAuthToken: authorizationToken, url, expirationDate})
+                try {
+                    const token = jwtDecode(authorizationToken);
+                    const expirationDate = token.exp ? token.exp : 0;
+                    await chrome.action.setBadgeText({text: '1'});
+                    await chrome.storage.local.set({latestAuthToken: authorizationToken, url, expirationDate})
+                } catch (e) {
+                    console.error("Could not decode token")
+                }
             }
         } else {
             await chrome.storage.local.set({latestAuthToken: ''})

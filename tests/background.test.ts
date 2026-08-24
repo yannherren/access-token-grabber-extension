@@ -2,13 +2,18 @@
 
 // @ts-ignore
 import { mockHelpers } from './setup';
-
+const jwt = require('jsonwebtoken');
 
 describe('Chrome Extension Background Script', () => {
 
+    let token = ''
+    let expiresAt = 0
+
     beforeEach(() => {
-        mockHelpers.resetAllMocks();
+        expiresAt = Math.floor(Date.now() / 1000) + 60 * 60;
+        token = 'Bearer ' + jwt.sign({ exp: expiresAt, claims: 'user' }, 'secret')
         jest.resetModules();
+        mockHelpers.resetAllMocks();
     });
 
     describe('Positive tests - webRequest handler', () => {
@@ -19,14 +24,16 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer test-token-123' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
             await new Promise(resolve => setTimeout(resolve, 100));
 
             expect(chrome.storage.local.set).toHaveBeenCalledWith({
-                latestAuthToken: 'Bearer test-token-123'
+                latestAuthToken: token,
+                url: "https://example.com",
+                expirationDate: expiresAt
             });
             expect(chrome.action.setBadgeText).toHaveBeenCalledWith({ text: '1' });
         });
@@ -38,15 +45,17 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'should-be-ignored' },
-                    { name: 'x-custom-auth', value: 'custom-token-456' }
+                    { name: 'authorization', value: jwt.sign({}, 'ignored') },
+                    { name: 'x-custom-auth', value: token }
                 ]
             });
 
             await new Promise(resolve => setTimeout(resolve, 100));
 
             expect(chrome.storage.local.set).toHaveBeenCalledWith({
-                latestAuthToken: 'custom-token-456'
+                latestAuthToken: token,
+                url: "https://example.com",
+                expirationDate: expiresAt
             });
         });
 
@@ -57,14 +66,16 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'default-auth-token' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
             await new Promise(resolve => setTimeout(resolve, 100));
 
             expect(chrome.storage.local.set).toHaveBeenCalledWith({
-                latestAuthToken: 'default-auth-token'
+                latestAuthToken: token,
+                url: "https://example.com",
+                expirationDate: expiresAt
             });
         });
 
@@ -74,7 +85,7 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'token-1' }
+                    { name: 'authorization', value: jwt.sign({}, 'ignored') }
                 ]
             });
 
@@ -82,14 +93,16 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'token-2' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
             await new Promise(resolve => setTimeout(resolve, 50));
 
             expect(chrome.storage.local.set).toHaveBeenLastCalledWith({
-                latestAuthToken: 'token-2'
+                latestAuthToken: token,
+                url: "https://example.com",
+                expirationDate: expiresAt
             });
         });
     });
@@ -102,7 +115,7 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer should-not-save' }
+                    { name: 'authorization', value: jwt.sign({}, 'ignored') }
                 ]
             });
 
@@ -182,7 +195,7 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer active-token' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
@@ -191,7 +204,7 @@ describe('Chrome Extension Background Script', () => {
             mockHelpers.setStorageValue('on', false);
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer should-clear' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
@@ -307,7 +320,7 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'Authorization', value: 'Bearer uppercase-token' }
+                    { name: 'Authorization', value: token }
                 ]
             });
 
@@ -323,7 +336,7 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer token' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
@@ -339,14 +352,16 @@ describe('Chrome Extension Background Script', () => {
 
             mockHelpers.triggerWebRequest({
                 requestHeaders: [
-                    { name: 'authorization', value: 'Bearer null-header-test' }
+                    { name: 'authorization', value: token }
                 ]
             });
 
             await new Promise(resolve => setTimeout(resolve, 100));
 
             expect(chrome.storage.local.set).toHaveBeenCalledWith({
-                latestAuthToken: 'Bearer null-header-test'
+                latestAuthToken: token,
+                url: "https://example.com",
+                expirationDate: expiresAt
             });
         });
     });
