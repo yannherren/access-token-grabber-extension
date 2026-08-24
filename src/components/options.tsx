@@ -1,5 +1,5 @@
 import styles from "../styles/options.module.css";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {OptionsStorage, Storage} from "../hooks/storage";
 import {ActiveToggle} from "./active-toggle";
 
@@ -10,6 +10,30 @@ interface Props {
 }
 
 export const Options = ({storage, updateOptions}: Props) => {
+
+    const [invalidRegex, setInvalidRegex] = useState(false);
+
+    useEffect(() => {
+        if (!storage.urlFilter) return;
+        const valid = checkRegex(storage.urlFilter);
+        setInvalidRegex(!valid);
+    }, [storage.urlFilter]);
+    //
+    // const updateRegexIfValid = (regex: string) => {
+    //     const valid = checkRegex(regex);
+    //     setInvalidRegex(!valid);
+    //     updateOptions({urlFilter: regex})
+    // }
+
+    const checkRegex = (regex: string) => {
+        try {
+            new RegExp(regex);
+            return true
+        } catch (e) {
+            return false;
+        }
+    }
+
     return <div className={styles.options}>
         <div className={styles["option"]}>
             <div className={styles.label}>
@@ -22,9 +46,9 @@ export const Options = ({storage, updateOptions}: Props) => {
         <div className={styles["option"]}>
             <div className={styles.label}>
                 <img src="url.png" alt="key"/>
-                <span>URL filter (Regex)</span>
+                <span>URL filter (Regex) {invalidRegex ? <span className={styles.invalid}>Invalid</span> : ''}</span>
             </div>
-            <input className={"input"} value={storage.urlFilter}
+            <input className={"input" + (invalidRegex ? ' ' + styles['invalid-option'] : '')} value={storage.urlFilter}
                    onChange={(e) => updateOptions({urlFilter: e.target.value})}/>
         </div>
         <div className={styles["option"] + " " + styles["inline-option"] + " " + styles['toggle-option']}>

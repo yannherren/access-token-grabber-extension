@@ -365,4 +365,112 @@ describe('Chrome Extension Background Script', () => {
             });
         });
     });
+
+    describe('Positive/Negative tests - urlFilter', () => {
+
+        test('should save token if url matches urlFilter regex', async () => {
+            mockHelpers.setStorageValue('on', true);
+            mockHelpers.setStorageValue('urlFilter', '^https://example\\.com.*');
+            require('../src/background');
+
+            mockHelpers.triggerWebRequest({
+                url: 'https://example.com/api/data',
+                requestHeaders: [
+                    { name: 'authorization', value: token }
+                ]
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            expect(chrome.storage.local.set).toHaveBeenCalledWith({
+                latestAuthToken: token,
+                url: 'https://example.com/api/data',
+                expirationDate: expiresAt
+            });
+            expect(chrome.action.setBadgeText).toHaveBeenCalledWith({ text: '1' });
+        });
+
+        test('should not save token if url does not match urlFilter regex', async () => {
+            mockHelpers.setStorageValue('on', true);
+            mockHelpers.setStorageValue('urlFilter', '^https://only-this-domain\\.com.*');
+            require('../src/background');
+
+            mockHelpers.triggerWebRequest({
+                url: 'https://example.com/api/data',
+                requestHeaders: [
+                    { name: 'authorization', value: token }
+                ]
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            expect(chrome.action.setBadgeText).not.toHaveBeenCalled();
+            expect(chrome.storage.local.set).not.toHaveBeenCalledWith(
+                expect.objectContaining({ latestAuthToken: expect.any(String) })
+            );
+        });
+
+        test('should save token regardless of url if urlFilter is empty', async () => {
+            mockHelpers.setStorageValue('on', true);
+            mockHelpers.setStorageValue('urlFilter', '');
+            require('../src/background');
+
+            mockHelpers.triggerWebRequest({
+                url: 'https://any-random-domain.io/xyz',
+                requestHeaders: [
+                    { name: 'authorization', value: token }
+                ]
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            expect(chrome.storage.local.set).toHaveBeenCalledWith({
+                latestAuthToken: token,
+                url: 'https://any-random-domain.io/xyz',
+                expirationDate: expiresAt
+            });
+            expect(chrome.action.setBadgeText).toHaveBeenCalledWith({ text: '1' });
+        });
+
+        test('should not save token and not throw if urlFilter is an invalid regex', async () => {
+            mockHelpers.setStorageValue('on', true);
+            mockHelpers.setStorageValue('urlFilter', '(unclosed[');
+            require('../src/background');
+
+            expect(() => {
+                mockHelpers.triggerWebRequest({
+                    url: 'https://example.com/api/data',
+                    requestHeaders: [
+                        { name: 'authorization', value: token }
+                    ]
+                });
+            }).not.toThrow();
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            expect(chrome.action.setBadgeText).not.toHaveBeenCalled();
+        });
+
+        test('should support wildcard/subdomain matching via urlFilter regex', async () => {
+            mockHelpers.setStorageValue('on', true);
+            mockHelpers.setStorageValue('urlFilter', '^https://.*\\.example\\.com/.*');
+            require('../src/background');
+
+            mockHelpers.triggerWebRequest({
+                url: 'https://api.example.com/v1/users',
+                requestHeaders: [
+                    { name: 'authorization', value: token }
+                ]
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            expect(chrome.storage.local.set).toHaveBeenCalledWith({
+                latestAuthToken: token,
+                url: 'https://api.example.com/v1/users',
+                expirationDate: expiresAt
+            });
+            expect(chrome.action.setBadgeText).toHaveBeenCalledWith({ text: '1' });
+        });
+    });
 });

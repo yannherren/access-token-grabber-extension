@@ -19,6 +19,7 @@ chrome.webRequest.onSendHeaders.addListener(
                         }
                     } catch (e) {
                         console.error('Invalid regex:', e);
+                        return;
                     }
                 }
                 const headerName =  (headerNameData['headerName'] ? headerNameData['headerName'] : 'authorization');

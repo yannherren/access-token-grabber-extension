@@ -47,6 +47,14 @@
     height: 24px;
 }
 
+.invalid-option {
+    border: 1px solid red !important;
+}
+
+.invalid {
+    color: red;
+}
+
 .tutorial {
     margin-top: 32px;
 }
