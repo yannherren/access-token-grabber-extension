@@ -66,7 +66,7 @@ const Popup = () => {
                 </div>
             </div>
         case Route.Options:
-            return <div className={styles.container} style={{'height': '295px'}}>
+            return <div className={styles.container} style={{'height': '345px'}}>
                 <div className={outAnimationClass}>
                     <Subpage back={() => changeRoute(Route.Home, styles["out-right"])} title="Options">
                         { storage ? <Options storage={storage} updateOptions={updateOptions}></Options> : ''}

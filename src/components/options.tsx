@@ -35,5 +35,16 @@ export const Options = ({storage, updateOptions}: Props) => {
             <ActiveToggle value={storage.bearerRemoval ?? false}
                           onToggle={value => updateOptions({bearerRemoval: value})}/>
         </div>
+
+        <div className={styles["option"] + " " + styles["inline-option"] + " " + styles.tutorial}>
+            <div className={styles.label + " " + styles.bearer}>
+                <img src="question.png" alt="key"/>
+                <a
+                    href={chrome.runtime.getURL('install.html')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Show me how Access Token Grabber works</a>
+            </div>
+        </div>
     </div>
 }
