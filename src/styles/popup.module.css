@@ -9,13 +9,8 @@
     color: white;
     box-sizing: border-box;
 
-    height: 265px;
     overflow: hidden;
-    transition: height 0.2s ease-in-out; /* back animation doesn't work! */
-}
-
-.subpage {
-    height: calc-size(auto, size);
+    transition: height 0.2s ease-in-out;
 }
 
 
