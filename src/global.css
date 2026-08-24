@@ -3,13 +3,41 @@
 .toggle-button {
     background-color: transparent;
     border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 .toggle-button img {
     width: 48px;
     height: auto;
+    cursor: pointer;
 }
 
+.back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.back-button img {
+    width: 8px;
+    height: auto;
+}
+
+.secondary-button {
+    padding: 8px 12px;
+    border: 1px solid #3088df;
+    border-radius: 4px;
+    background: none;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+}
 
 .on {
     border: none;

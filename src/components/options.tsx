@@ -1,85 +1,74 @@
 import styles from "../styles/options.module.css";
 import React, {useEffect, useState} from "react";
-import {clipboard} from "@extend-chrome/clipboard";
-import {Inspect} from "./inspect";
+import {OptionsStorage, Storage} from "../hooks/storage";
+import {ActiveToggle} from "./active-toggle";
+
 
 interface Props {
-    tokenCopied: (copied: boolean) => void
+    storage: Storage
+    updateOptions: (values: OptionsStorage) => void
 }
 
-export const Options = ({tokenCopied}: Props) => {
-    const [headerName, setHeaderName] = useState('Authorization');
-    const [bearerRemoval, setBearerRemoval] = useState<null | boolean>(null);
+export const Options = ({storage, updateOptions}: Props) => {
 
-
-    useEffect(() => {
-        setTimeout(() => {
-            chrome.storage.local.set({headerName})
-        }, 200)
-    }, [headerName])
-
+    const [invalidRegex, setInvalidRegex] = useState(false);
 
     useEffect(() => {
-        if (bearerRemoval === null) {
-            return
+        if (!storage.urlFilter) return;
+        const valid = checkRegex(storage.urlFilter);
+        setInvalidRegex(!valid);
+    }, [storage.urlFilter]);
+    //
+    // const updateRegexIfValid = (regex: string) => {
+    //     const valid = checkRegex(regex);
+    //     setInvalidRegex(!valid);
+    //     updateOptions({urlFilter: regex})
+    // }
+
+    const checkRegex = (regex: string) => {
+        try {
+            new RegExp(regex);
+            return true
+        } catch (e) {
+            return false;
         }
-        if (bearerRemoval) {
-            chrome.storage.local.set({bearerRemoval: true})
-        } else {
-            chrome.storage.local.set({bearerRemoval: false})
-        }
-    }, [bearerRemoval]);
+    }
 
-    useEffect(() => {
-        chrome.storage.local.get('headerName').then(val => {
-            setHeaderName(val['headerName'])
-        })
-
-        chrome.storage.local.get('bearerRemoval').then(val => {
-            const removeBearer = val['bearerRemoval'];
-            setBearerRemoval(removeBearer)
-
-            chrome.storage.local.get('latestAuthToken').then(async (entries) => {
-                if (entries.latestAuthToken) {
-                    let token: string = entries.latestAuthToken;
-
-                    if (removeBearer) {
-                        token = token.replace("Bearer ", "").replace("bearer ", "");
-                    }
-
-                    await clipboard.writeText(token);
-                    await chrome.storage.local.set({latestAuthToken: undefined})
-                    tokenCopied(true)
-                } else {
-                    tokenCopied(false);
-                }
-            })
-        })
-    }, []);
-
-
-    return <>
+    return <div className={styles.options}>
         <div className={styles["option"]}>
             <div className={styles.label}>
                 <img src="key.png" alt="key"/>
                 <span>Header name (e.g. Authorization)</span>
             </div>
-            <input className={"input"} value={headerName} onChange={(e) => setHeaderName(e.target.value)}/>
+            <input className={"input"} value={storage.headerName}
+                   onChange={(e) => updateOptions({headerName: e.target.value})}/>
         </div>
-        <div className={styles["option"] + " " + styles["inline-option"]}>
+        <div className={styles["option"]}>
+            <div className={styles.label}>
+                <img src="url.png" alt="key"/>
+                <span>URL filter (Regex) {invalidRegex ? <span className={styles.invalid}>Invalid</span> : ''}</span>
+            </div>
+            <input className={"input" + (invalidRegex ? ' ' + styles['invalid-option'] : '')} value={storage.urlFilter}
+                   onChange={(e) => updateOptions({urlFilter: e.target.value})}/>
+        </div>
+        <div className={styles["option"] + " " + styles["inline-option"] + " " + styles['toggle-option']}>
             <div className={styles.label + " " + styles.bearer}>
                 <img src="remove.png" alt="key"/>
                 <span>Remove "Bearer" prefix</span>
             </div>
-            {bearerRemoval ?
-                <button className={"toggle-button"} onClick={() => setBearerRemoval(false)}>
-                    <img src="on-button.png" alt="on"/>
-                </button> :
-
-                <button className={"toggle-button"} onClick={() => setBearerRemoval(true)}>
-                    <img src="off-button.png" alt="on"/>
-                </button>
-            }
+            <ActiveToggle value={storage.bearerRemoval ?? false}
+                          onToggle={value => updateOptions({bearerRemoval: value})}/>
         </div>
-    </>
+
+        <div className={styles["option"] + " " + styles["inline-option"] + " " + styles.tutorial}>
+            <div className={styles.label + " " + styles.bearer}>
+                <img src="question.png" alt="key"/>
+                <a
+                    href={chrome.runtime.getURL('install.html')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Show me how Access Token Grabber works</a>
+            </div>
+        </div>
+    </div>
 }

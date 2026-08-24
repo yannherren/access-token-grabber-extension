@@ -1,0 +1,138 @@
+.bar {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: appear-up 0.4s forwards;
+    opacity: 0;
+}
+
+.logo {
+    height: 36px;
+}
+
+
+.content {
+    padding: 0 24px 24px 24px;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.settings {
+    background-color: transparent;
+    border: none;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.expiration {
+    font-size: 12px;
+    background: #31512c;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-family: Monospace;
+}
+
+.success {
+    animation: appear 0.4s 0.2s forwards;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.success img {
+    height: 24px;
+    width: auto;
+    animation: appear-bounce 0.3s 0.4s forwards;
+    opacity: 0;
+}
+
+.waiting {
+    animation: appear-up 0.4s forwards;
+    opacity: 0;
+}
+
+.section {
+    margin-top: 12px;
+}
+
+.message {
+    /*margin-bottom: 24px;*/
+    font-size: 14px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    animation: appear-up 0.4s forwards;
+    opacity: 0;
+}
+
+.details-title {
+    margin-bottom: 4px;
+}
+
+.truncated {
+    width: 250px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item {
+    display: flex;
+    gap: 16px;
+    opacity: 0.6;
+    align-items: center;
+    opacity: 0.6;
+}
+
+.url {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.interaction-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.interaction-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.interaction-controls img {
+    cursor: pointer;
+}
+
+@keyframes appear-up {
+    from { transform: translateY(8px); opacity: 0 }
+    to { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes appear {
+    from { transform: scale(0.8); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
+
+@keyframes appear-bounce {
+    0% { transform: scale(0.8); opacity: 0 }
+    75% { transform: scale(1.1); opacity: 1 }
+    100% { transform: scale(1); opacity: 1 }
+}

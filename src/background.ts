@@ -1,18 +1,40 @@
+import {jwtDecode} from "jwt-decode";
+
 let authorizationToken: string | undefined = '';
 
 chrome.webRequest.onSendHeaders.addListener(
     async (req) => {
         const onData = await chrome.storage.local.get('on')
         const headerNameData = await chrome.storage.local.get('headerName')
+        const urlFilterData = await chrome.storage.local.get('urlFilter')
         if (onData['on']) {
             if (req.requestHeaders) {
+                const url = req.url;
+                const urlFilter = urlFilterData['urlFilter'] ? urlFilterData['urlFilter'] : ''
+                if (urlFilter) {
+                    try {
+                        const regex = new RegExp(urlFilter);
+                        if (!regex.test(url)) {
+                            return;
+                        }
+                    } catch (e) {
+                        console.error('Invalid regex:', e);
+                        return;
+                    }
+                }
                 const headerName =  (headerNameData['headerName'] ? headerNameData['headerName'] : 'authorization');
                 authorizationToken = req.requestHeaders.find(it => it.name === headerName)?.value;
                 if (!authorizationToken) {
                     return;
                 }
-                await chrome.action.setBadgeText({text: '1'});
-                await chrome.storage.local.set({latestAuthToken: authorizationToken})
+                try {
+                    const token = jwtDecode(authorizationToken);
+                    const expirationDate = token.exp ? token.exp : 0;
+                    await chrome.action.setBadgeText({text: '1'});
+                    await chrome.storage.local.set({latestAuthToken: authorizationToken, url, expirationDate})
+                } catch (e) {
+                    console.error("Could not decode token")
+                }
             }
         } else {
             await chrome.storage.local.set({latestAuthToken: ''})

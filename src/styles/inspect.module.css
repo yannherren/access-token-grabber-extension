@@ -1,23 +1,21 @@
-.details {
+.subtitle {
+    font-weight: bold;
     animation: appear-up 0.4s 0.2s forwards;
     opacity: 0;
-}
-
-.details summary {
-    margin: 8px 0 0 40px;
-    cursor: pointer;
 }
 
 .properties {
     display: grid;
     grid-template-columns: auto auto;
     margin-top: 8px;
-    background-color: #090909;
     border-radius: 4px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
 }
 
 .properties div {
     font-family: Monospace;
+    font-size: 12px;
     padding: 4px 6px;
     position: relative;
 }
@@ -62,6 +60,51 @@
     transition: 0.2s;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
+}
+
+.interaction {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.token summary {
+    cursor: pointer;
+}
+
+.token {
+    margin-top: 8px;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+}
+
+.token-content {
+    word-break: break-all;
+    padding: 4px;
+    font-family: Monospace;
+}
+
+.faulty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: appear-up 0.4s 0.2s forwards;
+    opacity: 0;
+    margin-top: 16px;
+}
+
+.faulty h1 {
+    font-size: 16px;
+}
+
+.faulty-details {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 @keyframes appear-up {

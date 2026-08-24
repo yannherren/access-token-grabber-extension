@@ -1,47 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 interface Props {
-    onToggle: (listening: boolean) => void
+    value: boolean
+    onToggle: (value: boolean) => void
 }
 
-export const ActiveToggle = ({onToggle}: Props) => {
-
-    const [listening, setListening] = useState<null | boolean>(null);
-
-    useEffect(() => {
-        chrome.storage.local.get('on').then(val => {
-            toggleListening(val['on'])
-        })
-    }, []);
-
-    useEffect(() => {
-        if (listening === null) {
-            return
-        }
-
-        if (listening) {
-            chrome.action.setIcon({path: '/on.png'})
-            chrome.storage.local.set({on: true})
-        } else {
-            chrome.action.setIcon({path: '/off.png'});
-            chrome.action.setBadgeText({text: ''});
-            chrome.storage.local.set({latestAuthToken: ''})
-            chrome.storage.local.set({on: false})
-        }
-    }, [listening])
-
-    const toggleListening = (listening: boolean) => {
-        setListening(listening);
-        onToggle(listening);
-    }
-
+export const ActiveToggle = ({onToggle, value}: Props) => {
     return <>
-        {listening ?
-            <button className={"toggle-button"} onClick={() => toggleListening(false)}>
+        {value ?
+            <button className={"toggle-button"} onClick={() => onToggle(false)}>
                 <img src="on-button.png" alt="on"/>
             </button> :
-
-            <button className={"toggle-button"} onClick={() => toggleListening(true)}>
+            <button className={"toggle-button"} onClick={() => onToggle(true)}>
                 <img src="off-button.png" alt="on"/>
             </button>
         }

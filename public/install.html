@@ -1,119 +1,376 @@
-<html lang="en">
+<!-- Please note that this site was made with the help of Claude -->
+
+<!DOCTYPE html>
+<html lang="de">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ATG</title>
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-        body {
-            font-family: "Poppins", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            color: white;
 
+        :root {
+            --bg: linear-gradient(340deg, rgb(18, 50, 83) 0%, #0c243a 47%);
+            --ink: #efefef;
+            --muted: #c3c3c3;
+            --accent: #cfcfcf;
+            --surface: #eae8e2;
+            --surface-line: #d6d3ca;
+
+            --font-display: "Poppins", sans-serif;
+            --font-body: "Poppins", sans-serif;
+
+            --radius-img: 28px;
+            --max-width: 1080px;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: url("bg.svg");
-            background-size: cover;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         a {
-            color: white;
+            color: var(--ink);
         }
 
-        .content {
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .hero {
+            height: 100svh;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
-            height: 100%;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-size: 13px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(48px, 9vw, 72px);
+            line-height: 1.02;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin-top: 22px;
+            font-size: clamp(16px, 2vw, 19px);
+            color: var(--muted);
+            max-width: 480px;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .scroll-cue span {
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+        }
+
+        .scroll-cue .dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--surface-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: breathe 2.6s ease-in-out infinite;
+        }
+
+        .scroll-cue svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.55;
+            }
+            50% {
+                transform: translateY(6px);
+                opacity: 1;
+            }
+        }
+
+        .steps {
+            max-width: var(--max-width);
+            margin: 0 auto;
             padding: 0 24px;
         }
 
-        .install {
-            background: transparent;
-            width: 200px;
-            margin-bottom: 48px;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin: 0;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 24px;
-            font-weight: normal;
-            margin: 0;
-        }
-
-        .install-content {
-            display: flex;
-            flex-direction: column;
+        .step {
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 72px;
             align-items: center;
-            margin-bottom: 48px;
+            padding: 120px 0;
         }
 
-        .install-notes {
-            font-size: 18px;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 48px;
+        .step:nth-child(odd) .step-media {
+            order: 2;
         }
 
-        ol li {
-            position: relative;
-            padding-left: 20px;
-            padding-bottom: 8px;
-            padding-top: -8px;
+        .step:nth-child(odd) .step-text {
+            order: 1;
         }
 
-        ol li::before {
-            content: '';
-            background-color: rgb(31, 96, 156);
-            width: 30px;
-            height: 30px;
-            position: absolute;
+        .step-number {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 15px;
+            color: var(--accent);
+            margin-bottom: 18px;
             display: block;
-            left: -27px;
-            top: -2px;
-            z-index: -1;
-            border-radius: 50%;
+        }
+
+        .step-text h2 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(28px, 3.4vw, 38px);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .step-text p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.65;
+            max-width: 420px;
+        }
+
+        .step-media {
+            aspect-ratio: 4/3;
+            border-radius: var(--radius-img);
+            background: var(--surface);
+            border: 1px dashed var(--surface-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .step-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-img);
+            display: block;
+        }
+
+        .step-media, .step-text {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .step.is-visible .step-media {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step.is-visible .step-text {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.12s;
         }
 
         .shortcut {
-            background-color: rgba(66, 66, 66, 0.7);
-            padding: 0 4px;
-            border-radius: 6px;
+            padding: 2px 6px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
         }
+
+        .outro {
+            height: 80svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .outro-inner {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .outro-inner.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .outro h2 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(36px, 6vw, 64px);
+        }
+
+        .outro p {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        @media (max-width: 780px) {
+            .step {
+                grid-template-columns:1fr;
+                gap: 32px;
+                padding: 80px 0;
+                text-align: left;
+            }
+
+            .step:nth-child(even) .step-media,
+            .step:nth-child(even) .step-text {
+                order: initial;
+            }
+
+            .step-text p {
+                max-width: none;
+            }
+        }
+
     </style>
-
 </head>
-
 <body>
-<section class="content">
-    <div class="install-content">
-        <img src="header-logo.png"  alt="install" class="install"/>
-        <h1>Welcome!</h1>
-        <h2>Thank you for installing Access Token Grabber!</h2>
-    </div>
-    <div class="install-notes">
-        <div>
-            Here is how to use Access Token Grabber:
-            <ol>
-                <li>Activate the extension by clicking on its icon.</li>
-                <li>Pin the extension to your browser toolbar for quick access.</li>
-                <li>Browse to your app that triggers authenticated requests. A small "1" will appear on the icon, indicating that a token has been found.</li>
-                <li>Click once on the icon or press <span class="shortcut">Alt+C</span> to copy the token to your clipboard.</li>
-                <li>Paste the token into Postman, cURL, or any API client to use it.</li>
-            </ol>
-            Have fun and don't forget to visit our <a href="https://github.com/yannherren/access-token-grabber-extension" target="_blank">GitHub repo</a>!
 
+<section class="hero">
+    <div class="hero-eyebrow">
+        <img src="header-logo.png" alt="logo" height="96"/>
+    </div>
+    <h1>Welcome to <br/>Access Token Grabber.</h1>
+    <p>Thank you for installing ATG. Scroll down to see how the extension works.</p>
+
+    <div class="scroll-cue">
+        <span>Scroll down</span>
+        <div class="dot">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="var(--accent)" stroke-width="1.6"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
     </div>
 </section>
 
+<main class="steps">
+
+    <section class="step">
+        <div class="step-media">
+            <img src="tutorial/1.png" alt="tutorial" style="object-position: right"/>
+        </div>
+        <div class="step-text">
+            <span class="step-number">01</span>
+            <h2>Setup</h2>
+            <p>Click the extension icon, then pin it to your toolbar for one-click access.</p>
+        </div>
+    </section>
+
+    <section class="step">
+        <div class="step-media">
+            <img src="tutorial/2.png" alt="tutorial"/>
+        </div>
+        <div class="step-text">
+            <span class="step-number">02</span>
+            <h2>Trigger a request</h2>
+            <p>Open your app and fire any authenticated request - login, fetch users, whatever hits your API.</p>
+        </div>
+    </section>
+
+    <section class="step">
+        <div class="step-media">
+            <img src="tutorial/3.png" alt="tutorial" style="object-position: right"/>
+        </div>
+        <div class="step-text">
+            <span class="step-number">03</span>
+            <h2>Auto-capture</h2>
+            <p>Access Token Grabber spots the JWT the moment it appears. A small "1" badge confirms the catch.</p>
+        </div>
+    </section>
+
+    <section class="step">
+        <div class="step-media">
+            <img src="tutorial/4.png" alt="tutorial"/>
+        </div>
+        <div class="step-text">
+            <span class="step-number">04</span>
+            <h2>Copy</h2>
+            <p>Using one click on the icon or the shortcut <span class="shortcut">Alt+C</span> the token gets copied to your clipboard.</p>
+        </div>
+    </section>
+
+    <section class="step">
+        <div class="step-media">
+            <img src="tutorial/5.png" alt="tutorial" style="object-position: right"/>
+        </div>
+        <div class="step-text">
+            <span class="step-number">05</span>
+            <h2>Paste</h2>
+            <p>Paste the token into Postman, cURL, or your tool of choice.</p>
+        </div>
+    </section>
+
+</main>
+
+<section class="outro">
+    <div class="outro-inner">
+        <h2>You are ready.</h2>
+        <p>Try obtaining your first token and <br/> do not forget to visit our
+            <a href="https://github.com/yannherren/access-token-grabber-extension" target="_blank">GitHub</a>
+            repository.</p>
+    </div>
+</section>
+
+<script src="install.js"></script>
+
 </body>
 </html>
-
