@@ -29,11 +29,11 @@ const Popup = () => {
 
     const setOn = (on: boolean) => {
         if (on) {
-            chrome.action.setIcon({path: '/on.png'})
+            chrome.action.setIcon({path: '/logos/on.png'})
             updateOptions({on: true})
             chrome.storage.local.set({on: true})
         } else {
-            chrome.action.setIcon({path: '/off.png'});
+            chrome.action.setIcon({path: '/logos/off.png'});
             chrome.action.setBadgeText({text: ''});
             updateOptions({on: false})
             updateRuntimeStorage({latestAuthToken: '', url: ''})

@@ -64,7 +64,7 @@ export const Inspect = ({storage}: Props) => {
                                      onClick={() => copyValue(rawValue)}>
                                     {rawValue}
                                     <span className={styles.copy}>
-                                        <img src="copy.png" height={12}/>
+                                        <img src="icons/copy.png" height={12}/>
                                     </span>
                                 </div>
                             </>
@@ -82,27 +82,27 @@ export const Inspect = ({storage}: Props) => {
             </div>
             <div className={styles.interaction}>
                 <button className="secondary-button" onClick={copyCurl}>
-                    <img src={copiedCurl ? 'done.png' : 'copy.png'} height={14}/>
+                    <img src={copiedCurl ? 'icons/done.png' : 'icons/copy.png'} height={14}/>
                     Copy authenticated cURL request
                 </button>
                 <a className="secondary-button" href="https://www.jwt.io/" target="_blank">
-                    <img src="external.png" height={12}/>
+                    <img src="icons/external.png" height={12}/>
                     Open JWT.io Debugger
                 </a>
             </div>
         </> :
         <div className={styles.faulty}>
-            <img src="error.png" height={36}/>
+            <img src="icons/error.png" height={36}/>
             <h1>Couldn't decode token</h1>
             <div className={styles['faulty-details']}>Sorry, we couldn't decode this type of token! However, there are still some actions you can take.</div>
 
             <div className={styles.interaction}>
                 <button className="secondary-button" onClick={copyCurl}>
-                    <img src={copiedCurl ? 'done.png' : 'copy.png'} height={14}/>
+                    <img src={copiedCurl ? 'icons/done.png' : 'icons/copy.png'} height={14}/>
                     Copy authenticated cURL request
                 </button>
                 <a className="secondary-button" href="https://www.jwt.io/" target="_blank">
-                    <img src="external.png" height={12}/>
+                    <img src="icons/external.png" height={12}/>
                     Open JWT.io Debugger
                 </a>
             </div>

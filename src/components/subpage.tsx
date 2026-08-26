@@ -12,7 +12,7 @@ export const Subpage = ({ children, title, back }: Props) => {
     return <div className={styles.page}>
         <div className={styles.bar}>
             <button className={"back-button"} onClick={() => back()}>
-                <img src="back.png" alt="on"/>
+                <img src="icons/back.png" alt="on"/>
             </button>
             <span className={styles["bar-title"]}>{title}</span>
         </div>

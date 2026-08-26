@@ -20,14 +20,17 @@ export const Home = ({storage, navigate, setOn}: Props) => {
     const isValid = () => {
         const current_time = new Date()
         const expDate = storage.expirationDate ?? 0;
-        const difference = expDate - current_time.getTime()
+        const difference = (expDate * 1000) - current_time.getTime()
         return difference > 0;
     }
 
     const getValidDuration = () => {
         const current_time = new Date()
         const expDate = storage.expirationDate ?? 0;
-        const difference = expDate - current_time.getTime()
+        const difference = (expDate * 1000) - current_time.getTime()
+        console.log(expDate)
+        console.log(difference)
+        console.log("curr: " + current_time.getTime())
         const secondsDiff = difference / 1000;
         const seconds = Math.floor(secondsDiff % 60)
         const minutes = Math.floor(secondsDiff / 60)
@@ -56,14 +59,10 @@ export const Home = ({storage, navigate, setOn}: Props) => {
     return (
         <>
             <div className={styles.bar}>
-                <img className={styles.logo} src="logo-full.png" alt="logo"/>
+                <img className={styles.logo} src="logos/logo-full.png" alt="logo"/>
                 <div className={styles.options}>
-                    {/*<div className={styles.expiration}>*/}
-                    {/*    <img src="clock.png" height={12}/>*/}
-                    {/*    {validDuration}*/}
-                    {/*</div>*/}
                     <button className={styles.settings} onClick={() => navigate(Route.Options)}>
-                        <img src="settings.png" height={16}/>
+                        <img src="icons/settings.png" height={16}/>
                     </button>
                     <ActiveToggle
                         value={storage?.on ? storage.on : false}
@@ -76,27 +75,27 @@ export const Home = ({storage, navigate, setOn}: Props) => {
                     {storage?.latestAuthToken ?
                         <>
                             <div className={styles.success}>
-                                <img src="done.png" alt="done"/>
+                                <img src="icons/done.png" alt="done"/>
                                 <span>The most recent token has been copied to your clipboard. Handle it with care.</span>
                             </div>
 
                             <div className={styles.details}>
                                 <div className={styles['interaction-item']}>
                                     <div className={styles.item}>
-                                        <img src="key.png" height={12}/>
+                                        <img src="icons/key.png" height={12}/>
                                         <span className={styles.truncated}>{storage.latestAuthToken}</span>
                                     </div>
                                     <div className={styles['interaction-controls']}>
-                                        <img src={tokenCopied ? 'done.png' : 'copy.png'} height={16} onClick={copyToken} />
-                                        <img src="inspect.png" height={16} onClick={() => navigate(Route.Inspect)}/>
+                                        <img src={tokenCopied ? 'icons/done.png' : 'icons/copy.png'} height={16} onClick={copyToken} />
+                                        <img src="icons/inspect.png" height={16} onClick={() => navigate(Route.Inspect)}/>
                                     </div>
                                 </div>
                                 <div className={styles.item}>
-                                    <img src="url.png" height={12}/>
+                                    <img src="icons/url.png" height={12}/>
                                     <span className={styles.url}>{storage.url}</span>
                                 </div>
                                 <div className={styles.item}>
-                                    <img src="clock.png" height={12}/>
+                                    <img src="icons/clock.png" height={12}/>
                                     {valid ?
                                         <span>Expires in {validDuration}</span> :
                                         <span>Token expired</span>

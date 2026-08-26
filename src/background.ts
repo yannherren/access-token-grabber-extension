@@ -22,8 +22,10 @@ chrome.webRequest.onSendHeaders.addListener(
                         return;
                     }
                 }
-                const headerName =  (headerNameData['headerName'] ? headerNameData['headerName'] : 'authorization');
-                authorizationToken = req.requestHeaders.find(it => it.name === headerName)?.value;
+                const headerName =  (headerNameData['headerName'] ? headerNameData['headerName'] : 'Authorization');
+                authorizationToken = req.requestHeaders.find(it =>
+                    it.name.toLowerCase() === headerName.toLowerCase()
+                )?.value;
                 if (!authorizationToken) {
                     return;
                 }

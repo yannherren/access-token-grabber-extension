@@ -37,7 +37,7 @@ export const Options = ({storage, updateOptions}: Props) => {
     return <div className={styles.options}>
         <div className={styles["option"]}>
             <div className={styles.label}>
-                <img src="key.png" alt="key"/>
+                <img src="icons/key.png" alt="key"/>
                 <span>Header name (e.g. Authorization)</span>
             </div>
             <input className={"input"} value={storage.headerName}
@@ -45,7 +45,7 @@ export const Options = ({storage, updateOptions}: Props) => {
         </div>
         <div className={styles["option"]}>
             <div className={styles.label}>
-                <img src="url.png" alt="key"/>
+                <img src="icons/url.png" alt="key"/>
                 <span>URL filter (Regex) {invalidRegex ? <span className={styles.invalid}>Invalid</span> : ''}</span>
             </div>
             <input className={"input" + (invalidRegex ? ' ' + styles['invalid-option'] : '')} value={storage.urlFilter}
@@ -53,7 +53,7 @@ export const Options = ({storage, updateOptions}: Props) => {
         </div>
         <div className={styles["option"] + " " + styles["inline-option"] + " " + styles['toggle-option']}>
             <div className={styles.label + " " + styles.bearer}>
-                <img src="remove.png" alt="key"/>
+                <img src="icons/remove.png" alt="key"/>
                 <span>Remove "Bearer" prefix</span>
             </div>
             <ActiveToggle value={storage.bearerRemoval ?? false}
@@ -62,7 +62,7 @@ export const Options = ({storage, updateOptions}: Props) => {
 
         <div className={styles["option"] + " " + styles["inline-option"] + " " + styles.tutorial}>
             <div className={styles.label + " " + styles.bearer}>
-                <img src="question.png" alt="key"/>
+                <img src="icons/question.png" alt="key"/>
                 <a
                     href={chrome.runtime.getURL('install.html')}
                     target="_blank"
